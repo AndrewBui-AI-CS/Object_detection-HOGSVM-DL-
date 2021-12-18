@@ -1,3 +1,5 @@
 Data 
-model
+# model
 yolov5s.pt
+model/pedestrian.yml
+model/pedestrian2.yml
