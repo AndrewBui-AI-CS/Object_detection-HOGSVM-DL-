@@ -31,16 +31,17 @@ def get_svm_detector_for_hog(model_path, hog):
   svm_detector[-1] = rho
   return svm_detector
 
-def detect(img_batch, hog, encode_image, color, hitThreshold):
+def detect(img_batch, hog, encode_image, color, winStride, hitThreshold):
     img_str_list = [] 
     bbox_list = []
     for im in img_batch:
-        finalHeight = 800.0
+        finalHeight = 840.0
         scale = finalHeight / im.shape[0]
         im = cv2.resize(im, None, fx=scale, fy=scale)
-        bboxes, weights = hog.detectMultiScale(im, winStride=(8, 8),
+        bboxes, weights = hog.detectMultiScale(im, winStride = winStride,
                                         padding=(32, 32),scale=1.05, 
                                         finalThreshold=2,hitThreshold = hitThreshold)
+        # print(weights)
         for bbox in bboxes:
             x1, y1, w, h = bbox
             x2, y2 = x1 + w, y1 + h

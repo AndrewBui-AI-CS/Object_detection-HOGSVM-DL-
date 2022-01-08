@@ -1,41 +1,45 @@
 {% extends "layout.html" %} {% block content %}
-<h3>Upload image(s) and select a model</h3>
+<!-- <img src="../assets/pedestrian.jpg" /> -->
+<h3 class="text-warning text-center">
+  Detect human in images with Computer Vision
+</h3>
 
 <hr />
 
 <form method="post" action="" enctype="multipart/form-data">
-  <div class="mb-3">
-    <label for="file_list" class="form-label">Upload Images</label>
-    <input
-      class="form-control w-auto"
-      type="file"
-      name="file_list"
-      id="file_list"
-      multiple
-    />
-  </div>
-  <div class="mb-3">
-    <div class="form-group">
-      <label>Select YOLO Model</label>
+  <div class="">
+    <div
+      class="d-flex align-items-center justify-content-center mb-4 flex-column"
+    >
+      <label for="file_list" class="form-label"
+        >Upload One or More Images</label
+      >
+      <input
+        class="form-control w-auto"
+        type="file"
+        name="file_list"
+        id="file_list"
+        multiple
+      />
     </div>
-    <select class="form-select w-auto" name="model_name">
-      {% for selection in model_selection_options %}
-      <option value="{{ selection }}">{{ selection }}</option>
-      {% endfor %}
-    </select>
+    <div
+      class="d-flex align-items-center justify-content-center flex-column mb-4"
+    >
+      <div class="form-group">
+        <label>Select detection models</label>
+      </div>
+      <select class="form-select w-auto" name="model_name">
+        {% for selection in model_selection_options %}
+        <option value="{{ selection }}">{{ selection }}</option>
+        {% endfor %}
+      </select>
+    </div>
   </div>
-  <!-- <div class="mb-3">
-    <label for="img_size_input" class="form-label">Model Inference Size</label>
-    <input
-      type="text"
-      class="form-control w-auto"
-      id="img_size_input"
-      name="img_size"
-      value="640"
-    />
-  </div> -->
-
-  <button class="btn btn-primary" type="submit">Submit</button>
+  <div class="text-center">
+    <button class="btn btn-primary bg-success rounded-pill" type="submit">
+      Submit
+    </button>
+  </div>
 </form>
 
 {% endblock %}

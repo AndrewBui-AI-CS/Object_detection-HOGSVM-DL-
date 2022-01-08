@@ -7,7 +7,7 @@ from api.helper import detect, get_svm_detector_for_hog
 from fastapi import FastAPI, Request, Form, File, UploadFile
 from fastapi.templating import Jinja2Templates
 from typing import List
-
+# import settings
 
 app = FastAPI()
 templates = Jinja2Templates(directory = 'api/templates')
@@ -28,7 +28,7 @@ def home(request: Request):
 async def detect_via_web_form(request: Request,
 							file_list: List[UploadFile] = File(...), 
 							model_name: str = Form(...),
-							img_size: int = Form(640)):
+							img_size: int = Form(800)):
 
 	img_batch = [cv2.imdecode(np.fromstring(await file.read(), np.uint8), cv2.IMREAD_COLOR)
 				for file in file_list]
@@ -70,12 +70,13 @@ async def detect_via_web_form(request: Request,
 							sigma, norm_type, threshold, 
 							gamma_correction, nlevels,gradient)
 				
-		svm_detector = get_svm_detector_for_hog('model/pedestrian.yml', hog)
+		svm_detector = get_svm_detector_for_hog('model/pedestrian2.yml', hog)
 		hog.setSVMDetector(svm_detector)
 		img_str_list = []
 		green = (0, 255, 0)
 		hitThreshold = 1.0
-		img_str_list, json_results = detect(img_batch, hog, base64EncodeImage, green, hitThreshold)
+		winStride = (4, 4)
+		img_str_list, json_results = detect(img_batch, hog, base64EncodeImage, green, winStride, hitThreshold)
 
 		return templates.TemplateResponse('show_results.html', {
 		'request': request,
@@ -105,7 +106,8 @@ async def detect_via_web_form(request: Request,
 		img_str_list = []
 		red = (0, 0, 255)
 		hitThreshold = 0
-		img_str_list, json_results = detect(img_batch, hog_lib, base64EncodeImage, red, hitThreshold)
+		winStride = (8, 8)
+		img_str_list, json_results = detect(img_batch, hog_lib, base64EncodeImage, red, winStride, hitThreshold)
 
 		return templates.TemplateResponse('show_results.html', {
 		'request': request,
