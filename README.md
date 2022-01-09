@@ -39,10 +39,10 @@ localhost:8000
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## Authors
-**Bùi Việt Hoàng**
-**Nguyễn Thịnh Vượng**
-**Nguyễn Trung Đức**
-**Đinh Công Minh**
+* **Bùi Việt Hoàng**
+* **Nguyễn Thịnh Vượng**
+* **Nguyễn Trung Đức**
+* **Đinh Công Minh**
 
 ## Acknowledgements
 I'll update later
