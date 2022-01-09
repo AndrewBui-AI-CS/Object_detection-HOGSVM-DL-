@@ -7,10 +7,11 @@ from api.helper import detect, get_svm_detector_for_hog
 from fastapi import FastAPI, Request, Form, File, UploadFile
 from fastapi.templating import Jinja2Templates
 from typing import List
+import yolov5
 # import settings
 
 app = FastAPI()
-templates = Jinja2Templates(directory = 'api/templates')
+templates = Jinja2Templates(directory = '/home/vuong/PycharmProjects/Object_detection-HOGSVM-DL-/api/templates')
 model_selection_options = ['yolov5s','pedestrian', 'pedestrian_default']
 model_dict = {'yolov5s' : '../model/yolo5s.pt', 'pedestrian': '../model/pedestrian.yml', 'pedestrian_default':'../model/pedestrian2.yml'} #set up model cache
 colors = [tuple([random.randint(0, 255) for _ in range(3)]) for _ in range(100)] #for bbox plotting
@@ -34,7 +35,10 @@ async def detect_via_web_form(request: Request,
 				for file in file_list]
 
 	if model_name == 'yolov5s':
-		model_dict[model_name] = torch.hub.load('ultralytics/yolov5', model_name, pretrained=True)
+		# load your model, pls change path
+		path = "/home/vuong/PycharmProjects/Object_detection-HOGSVM-DL-/model/last.pt"
+
+		model_dict[model_name] = yolov5.load(path)
 		results = model_dict[model_name](img_batch.copy(), size = img_size)
 		json_results = results_to_json(results,model_dict[model_name])
 		img_str_list = []
@@ -70,7 +74,7 @@ async def detect_via_web_form(request: Request,
 							sigma, norm_type, threshold, 
 							gamma_correction, nlevels,gradient)
 				
-		svm_detector = get_svm_detector_for_hog('model/pedestrian2.yml', hog)
+		svm_detector = get_svm_detector_for_hog('/model/pedestrian2.yml', hog)
 		hog.setSVMDetector(svm_detector)
 		img_str_list = []
 		green = (0, 255, 0)
