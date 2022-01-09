@@ -1,6 +1,10 @@
 import yolov5
 import torch
 from PIL import Image
+# how to use
+# download checkpoints : https://drive.google.com/file/d/1-NWaANYIB_GskOvTGkuf12lc0DIwjXND/view?usp=sharing
+# install yolov5: pip install yolov5
+
 
 def yolo_detect(image_path):
     # pip install yolov5
