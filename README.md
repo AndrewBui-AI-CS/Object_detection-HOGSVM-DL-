@@ -1,10 +1,10 @@
 # Human detection with Hog-SVM and Yolov5
-Detecting pedestrian in images with supports from Computer Vision technique. 
+Detecting pedestrians in images with supports from Computer Vision technique. 
 ## Description
 In this project, we did these three main things: 
 -  Introduce a traditional object detection method with Hog descriptor and SVM classifier
 -  Try another approach for the problem by including deep learning model Yolov5
--  Build a small web API for visualizing the result of the two approaches. 
+-  Build a small web API for visualizing results of the two approaches. 
 ## Installation
 From the github repo: 
 ```bash
@@ -48,4 +48,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 I'll update later
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[Not yet](https://choosealicense.com/licenses/mit/)
